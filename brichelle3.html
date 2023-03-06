@@ -1,0 +1,227 @@
+!DOCTYPE html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Sono:wght@200&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: helvetica, sans-serif;
+  margin: 0 auto;
+  max-width: 600px;
+  background: #232323;
+}
+div {
+  height: 320px;
+  background-size: 100% 100%;
+  position: relative;
+  margin: 40px 0 0 0;
+  border-radius: 12px;
+}
+h1 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Sono', sans-serif;
+  text-align: center;
+  font-size: 75px;
+  color: #aaaaaa;
+  margin: 60px 0 0 0;
+  color: red;
+}
+h2 {
+  text-align: center;
+  color: #bbbbbb;
+  margin: 0px 0 70px 0;
+  color: pink;
+
+}
+input {
+	font-size: 22px;
+}
+
+p {
+  color: rgba(245,255,255,1);
+  background: linear-gradient(bottom, rgba(1,6,7,1), rgba(4,9,8,.4));
+  background: -webkit-linear-gradient(bottom, rgba(4,4,3,1), rgba(6,9,7,.4));
+  background: -moz-linear-gradient(bottom, rgba(7,5,6,1), rgba(9,6,4,.4));
+  padding: 10px;
+  line-height: 28px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 30px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+  color: gold;
+}
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 150px;
+  color: pink;
+}
+.show-description small {
+  opacity: 1;
+}
+.first{
+  background-image: url("https://boulderlocavore.com/wp-content/uploads/2022/05/arroz-con-leche-2-glasses-close-up.jpg");
+}
+.second{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ19-_X2G9U84TGvQ2Lo4tDoYEbZw_K6T9RpQ&usqp=CAU");
+}
+.dessert{
+  background-image: url("https://tatyanaseverydayfood.com/wp-content/uploads/2021/04/Berry-Tres-Leches-Cake-Recipe-2.jpg");
+}
+.price {
+  float: right;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 40px;
+  }
+  h2 {
+    
+     font-family: 'Sono', sans-serif;
+     font-size: 20px;
+    margin: 20px 0 30px 0;
+  }
+  div {
+    margin: 20px 12px 0 12px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  small {
+    font-size: 16px;
+  }
+}
+
+</style>
+</head>
+<body>
+<h1>Bri's dessert </h1>
+<h2> New York City desserts </h2>
+<div class="first">
+	 <input type="number" min="0" style="width: 50px" class="quantities" > 
+  <p> arroz con leche <span class="price">$14</span><br />
+  <small>Rice pudding is a dish made from rice mixed with water or milk and other ingredients such as cinnamon, vanilla and raisins. Variants are used for either desserts or dinners. When used as a dessert, it is commonly combined with a sweetener such as sugar. </small></p>
+</div>
+
+<div class="second">
+	 <input type="number" min="0" style="width: 50px" class="quantities" > 
+  <p>Flan <span class="price">$12</span><br />
+  <small>Crème caramel, flan, caramel pudding or caramel custard is a custard dessert with a layer of clear caramel sauce.</small></p>
+</div>
+  
+<div class="dessert">
+	 <input type="number" min="0" style="width: 50px" class="quantities" > 
+  <p> tre leches cake<span class="price">$8</span><br />
+  <small>A tres leches cake, also known as pan tres leches, is a sponge cake—soaked in three kinds of milk: evaporated milk, condensed milk, and whole milk. Tres leches is a very light cake, with many air bubbles.</small></p>
+</div>
+<br><br>
+  <input id="Name" placeholder="Your name">
+    <input id="Email"type="email" placeholder="Your emal">
+  <input id="submit" type="submit">
+<br><br>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCEXcG_azC1FbQunKe_2GlV74EO627hz1Y",
+    authDomain: "brichelle3-a16e1.firebaseapp.com",
+    projectId: "brichelle3-a16e1",
+    storageBucket: "brichelle3-a16e1.appspot.com",
+    messagingSenderId: "1005128563291",
+    appId: "1:1005128563291:web:9982030abd7c1c2cd85d7e",
+    measurementId: "G-HF1LL6HLKK"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const Name = document.querySelector("#Name") 
+  const Email = document.querySelector("#Email")
+  const quantities = document.querySelectorAll(".quantities") 
+  document.querySelector('#submit').addEventListener('click', Submit)
+  const itemsList = ["arroz con leche", "Flan", "tre leches cake"]
+  const prices = document.querySelectorAll(".price")
+  
+  
+  function Submit() {
+  	  const timestamp = buildTimestamp()
+	    let total = 0
+		let cart = { }
+	  for  (let i=0; i<quantities.length; i=i+1) {
+	  	if (quantities[i].value != "0" && quantities[i].value != "") {
+let price = prices[i].innerHTML.replace('$', '')
+			  total = total + quantities[i].value * price 
+				
+	  		cart[itemsList[i]] = parseInt(quantities[i].value) 
+	  	}
+	  	quantities[i].value = ""
+	  }
+
+	  
+  	  set(ref(db, timestamp), {
+  		  Name: Name.value,
+  	      email: Email.value,
+		  cart:cart,
+		  totalPrice: total,
+		  paid: "not yet",
+
+		  
+  	  });
+
+  	  Name.value = ""
+  	  Email.value = ""
+  	}
+	function buildTimestamp() {
+	  const now = new Date();
+	  let timestamp = now.getFullYear().toString() + "/";
+	  //const month = now.toLocaleString('default', { month: 'long' });
+
+	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+	  month = month.toString()
+	  month = addLeadingZero(month)
+	  timestamp += month + "/"; 
+
+	  let date = now.getDate().toString()
+	  date = addLeadingZero(date)
+	  timestamp += date + "/";
+
+	  let hours = now.getHours().toString()
+	  hours = addLeadingZero(hours)
+	  timestamp += hours + ":";
+
+	  let minutes = now.getMinutes().toString()
+	  minutes = addLeadingZero(minutes)
+	  timestamp += minutes + ":";
+
+	  let seconds = now.getSeconds().toString()
+	  seconds = addLeadingZero(seconds)
+	  timestamp += seconds;
+  
+	  return timestamp
+	}
+	
+	function addLeadingZero(units) {
+		if (units.length < 2) {
+			units = "0" + units
+		}
+		return units
+	}
+</script>
+</body>
